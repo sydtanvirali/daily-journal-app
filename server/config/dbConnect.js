@@ -2,10 +2,12 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
   try {
-    const DB_OPTIONS = {
-      dbName: process.env.DATABASE_NAME,
-    };
-    await mongoose.connect(process.env.DATABASE_URL, DB_OPTIONS);
+    await mongoose.connect(
+      process.env.MONGODB_URI || "mongodb://localhost:27017/",
+      {
+        dbName: "DailyJournalDB",
+      }
+    );
     console.log("Database connected successfully");
   } catch (error) {
     console.error("Error connecting to the database:", error.message);
