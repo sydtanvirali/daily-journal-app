@@ -14,12 +14,17 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("Welcome to the Journal API");
+});
+
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/entries", entryRoutes);
 
 // Start server after DB connection
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  connectDB(process.env.MONGODB_URI);
+connectDB(process.env.MONGODB_URI).then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 });
