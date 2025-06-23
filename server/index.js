@@ -19,8 +19,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/entries", entryRoutes);
 
 // Start server after DB connection
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  connectDB();
 });
