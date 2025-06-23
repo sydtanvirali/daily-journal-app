@@ -1,13 +1,11 @@
 import mongoose from "mongoose";
 
-const connectDB = async () => {
+const connectDB = async (connectionString) => {
   try {
-    await mongoose.connect(
-      process.env.MONGODB_URI || "mongodb://localhost:27017/",
-      {
-        dbName: "DailyJournalDB",
-      }
-    );
+    if (!connectionString) {
+      throw new Error("MONGODB_URI is not defined!");
+    }
+    await mongoose.connect(connectionString, { dbName: "DailyJournalDB" });
     console.log("Database connected successfully");
   } catch (error) {
     console.error("Error connecting to the database:", error.message);

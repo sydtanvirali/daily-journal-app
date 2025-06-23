@@ -21,5 +21,5 @@ app.use("/api/entries", entryRoutes);
 // Start server after DB connection
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  connectDB();
+  connectDB(process.env.MONGODB_URI);
 });
